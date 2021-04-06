@@ -39,7 +39,7 @@
             echo "error";
         }
    } else if($op == "tambah"){
-       $id_ibu=uniqid('ibu');    
+        $id_ibu=uniqid('ibu');    
         $nama_ibu2 = $_GET['nama_ibu2'];
         $nik_ibu = htmlspecialchars($_GET['nik_ibu']);
         $alamat_ibu = htmlspecialchars($_GET['alamat_ibu']);
@@ -50,7 +50,6 @@
             echo "sukses";
         } else {
             echo "ERROR";
-            var_dump($tambah);
         }
     }
 ?>

@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Ibu</title>
+	<title>CRUD IBU</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script>
 		var nama_ibu;
@@ -17,22 +17,21 @@
 				//ambil nilai nik dari form
 				nama_ibu = $("#nama_ibu").val();
 			
+				//lakukan pengiriman data 
+				$.ajax({
+					url: "prosesCrudIbu.php",
+					data: "op=ambildata&nama_ibu="+nama_ibu,
+					cache: false,
+					success: function(msg){
+						//karna di server pembatas setiap data adalah |
+						//maka kita split dan akan membentuk array
+						data = msg.split("|");
 
-			//lakukan pengiriman data 
-			$.ajax({
-				url: "prosesCrudIbu.php",
-				data: "op=ambildata&nama_ibu="+nama_ibu,
-				cache: false,
-				success: function(msg){
-					//karna di server pembatas setiap data adalah |
-					//maka kita split dan akan membentuk array
-					data = msg.split("|");
-
-					//masukan ke masing - masing textfield
-					$("#nik_ibu").val(data[0]);
-					$("#alamat_ibu").val(data[1]);
-					$("#no_telp_ibu").val(data[2]);
-				}
+						//masukan ke masing - masing textfield
+						$("#nik_ibu").val(data[0]);
+						$("#alamat_ibu").val(data[1]);
+						$("#no_telp_ibu").val(data[2]);
+					}
 				});
 			});
 			//jika tombol update diclick
@@ -43,6 +42,7 @@
 					alert("Pilih dulu nama_ibu");
 					exit();
 				}
+
 				nik_ibu = $("#nik_ibu").val();
 				alamat_ibu = $("#alamat_ibu").val();
                 no_telp_ibu = $("#no_telp_ibu").val();
@@ -56,13 +56,13 @@
 					cache: false,
 					success: function(msg){
 						if (msg=="sukses") {
-								$("#status").html("Update Berhasil . . ");
-						}else{
-								$("#status").html("ERROR. . .");
-                                console.log(msg);
-							}
-							$("#loading").hide();
+							$("#status").html("Update Berhasil . . ");
+						} else {
+							$("#status").html("ERROR. . .");
+                            console.log(msg);
 						}
+						$("#loading").hide();
+					}
 				});
 			});
 
@@ -73,6 +73,7 @@
 					alert("Pilih dulu nama_ibu");
 					exit();
 				}
+				
 				$.ajax({
 					url: "prosesCrudIbu.php",
 					data: "op=delete&nama_ibu="+nama_ibu,
@@ -80,9 +81,10 @@
 					success: function(msg){
 						if (msg=="sukses") {
 							$("#status").html("Delete Berhasil. . . ");
-						}else{
+						} else {
 							$("#status").html("EROR. . .");
 						}
+
 						$("#nik_ibu").val("");
 						$("#alamat_ibu").val("");
 						$("#no_telp_ibu").val("");
@@ -92,77 +94,79 @@
 				});
 			});
 
-	//Jika link tambah dta diklik
-	$("#formtambah").click(function(){ 
- 		$("#formnik").show(); 
- 		$("#nama_ibu2").val(""); 
- 		$("#nik_ibu").val(""); 
- 		$("#alamat_ibu").val(""); 
- 		$("#no_telp_ibu").val(""); 
- 		});
- 	//jika link Tambah Data Karyawan diklik 
- $("#formtambah").click(function(){ 
- $("#formnik").show(); 
- $("#nama_ibu2").val(""); 
- $("#nik_ibu").val(""); 
- $("#alamat_ibu").val(""); 
- $("#no_telp_ibu").val(""); 
- }); 
+			//Jika link tambah dta diklik
+			$("#formtambah").click(function(){ 
+				$("#formnik").show(); 
+				$("#nama_ibu2").val(""); 
+				$("#nik_ibu").val(""); 
+				$("#alamat_ibu").val(""); 
+				$("#no_telp_ibu").val(""); 
+			});
+			
+			//jika link Tambah Data Karyawan diklik 
+			$("#formtambah").click(function(){ 
+				$("#formnik").show(); 
+				$("#nama_ibu2").val(""); 
+				$("#nik_ibu").val(""); 
+				$("#alamat_ibu").val(""); 
+				$("#no_telp_ibu").val(""); 
+			});
  
- //jika tombol TAMBAH diklik 
- $("#ttambah").click(function(){ 
- //ambil nilai-nilai dari masing-masing input 
- nama_ibu2 = $("#nama_ibu2").val(); 
- if(nama_ibu2==""){ 
- alert("Nama belum diisi\nKlik Tambah Data Ibu"); 
- exit(); 
- } 
- nik_ibu = $("#nik_ibu").val(); 
- alamat_ibu = $("#alamat_ibu").val(); 
- no_telp_ibu = $("#no_telp_ibu").val(); 
- datanya = "&nama_ibu2="+nama_ibu2 + "&nik_ibu="+nik_ibu+"&alamat_ibu="+alamat_ibu+"&no_telp_ibu="+no_telp_ibu;
- 			$("#status").html("Lagi ditambah..."); 
- 			$("#loading").show(); 
- 			$.ajax({ 
- 			url: "prosesCrudIbu.php", 
- 			data: "op=tambah"+datanya, 
- 			cache: false, 
- 			success: function(msg){ 
- 			if(msg=="sukses"){ 
- 			$("#status").html("Berhasil ditambah..."); 
- 			}else{ 
-			 $("#status").html("ERROR.."); 
-            } 
- 			$("#loading").hide(); 
- 			$("#nama_ibu").load("prosesCrudIbu.php","op=ambiloption"); 
- 			$("#formnik").hide(); 
- 			$("#nama_ibu2").val(""); }
- 		});
- 	});
-});
- </script>
+			//jika tombol TAMBAH diklik 
+			$("#ttambah").click(function(){ 
+				//ambil nilai-nilai dari masing-masing input 
+				nama_ibu2 = $("#nama_ibu2").val(); 
+				if(nama_ibu2==""){ 
+					alert("Nama belum diisi\nKlik Tambah Data Ibu"); 
+					exit(); 
+				} 
+				
+				nik_ibu = $("#nik_ibu").val(); 
+				alamat_ibu = $("#alamat_ibu").val(); 
+				no_telp_ibu = $("#no_telp_ibu").val(); 
+				datanya = "&nama_ibu2="+nama_ibu2 + "&nik_ibu="+nik_ibu+"&alamat_ibu="+alamat_ibu+"&no_telp_ibu="+no_telp_ibu;
+				
+				$("#status").html("Lagi ditambah..."); 
+				$("#loading").show(); 
+				$.ajax({ 
+					url: "prosesCrudIbu.php", 
+					data: "op=tambah"+datanya, 
+					cache: false, 
+					success: function(msg){ 
+						if(msg=="sukses"){ 
+							$("#status").html("Berhasil ditambah..."); 
+						} else { 
+							$("#status").html("ERROR.."); 
+						} 
+						$("#loading").hide(); 
+						$("#nama_ibu").load("prosesCrudIbu.php","op=ambiloption"); 
+						$("#formnik").hide(); 
+						$("#nama_ibu2").val(""); 
+					}
+				});
+ 			});
+		});
+ 	</script>
 </head> 
 <body> 
-Nama Ibu : 
-<select id="nama_ibu"></select> 
-<br> 
-<a id="formtambah" style="cursor:pointer;color:red;"><u>Tambah Data Karyawan</u></a> 
-<p style="display:none" id="formnik"> 
-Nama Ibu  :<br> 
-<input type="text" id="nama_ibu2"> 
-</p> 
-<p> 
-Nik ibu :<br> 
-<input type="text" id="nik_ibu"><p> 
-Alamat :<br> 
-<input type="text" id="alamat_ibu"><p> 
-No telp :<br> 
-<input type="text" id="no_telp_ibu" size="30"><p> 
-<button id="tupdate">UPDATE</button> 
-<button id="tdelete">DEL</button> 
-<button id="ttambah">TAMBAH</button><br><br>
-<button onclick="window.location.href='home.html'">BACK TO HOME</a></button>
-<br> 
-<span id="status"></span>  
+		Nama Ibu : 
+	<select id="nama_ibu"></select><br> 
+	<a id="formtambah" style="cursor:pointer;color:red;"><u>Tambah Data Ibu</u></a> 
+	<p style="display:none" id="formnik"> 
+		Nama Ibu  :<br> 
+		<input type="text" id="nama_ibu2"> 
+	</p> 
+	<p> 
+		Nik ibu :<br> 
+		<input type="text" id="nik_ibu"><p> 
+		Alamat :<br> 
+		<input type="text" id="alamat_ibu"><p> 
+		No telp :<br> 
+		<input type="text" id="no_telp_ibu" size="30"><p> 
+		<button id="tupdate">UPDATE</button> 
+		<button id="tdelete">DEL</button> 
+		<button id="ttambah">TAMBAH</button><br><br>
+		<button onclick="window.location.href='home.html'">BACK TO HOME</a></button><br> 
+	<span id="status"></span>  
 </body> 
 </html>
