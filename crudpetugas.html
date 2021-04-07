@@ -1,220 +1,107 @@
 <html>
 <head>
 	<title>CrudPetugas</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-	<script>
-		var option_nama_petugas;
-		var jabatan_petugas;
-		var jk_petugas;
-		var temp_lahir_petugas;
-		var tgl_lahir_petugas;
-		var alamat_petugas;
-		var telp_petugas;
-		var status_petugas;
-		var data_petugas;
-		
-		$(document).ready(function(){
-			//meloading option NIK dari database
-			$("#option_nama_petugas").load("prosesCrudPetugas.php", "func_petugas=ambil_option_petugas");
+	
+</head> 
+<body> 
+	<button type="buton" onclick="window.location.href='data_petugas.html'">Data Petugas</button>
+	<table id="ttable"border="1">
+    <thead>
+        <tr>
+            <th>ID Petugas</th>
+            <!-- <th>Nama Anak</th>
+            <th>ID Petugas</th>
+            <th>ID Vaksin</th> -->
+            <th>Nama</th>
+            <th>Jabatan</th>
+            <th>Jenis Kelamin</th>
+            <th>Tempat Lahir</th>
+            <th>Tanggal Lahir</th>
+            <th>Alamat</th>
+            <th>No Telepon</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody id="content">
 
-			//jika ada event onchange ambil data dari database
-			$("#option_nama_petugas").change(function(){
-				//ambil nilai nik dari form
-				option_nama_petugas = $("#option_nama_petugas").val();
-			
+    </tbody>
+  </table>
+  
+	
+	 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var id_petugas;
+    var nama_petugas;
+    var jabatan_petugas;
+    var jk_petugas;
+    var temp_lahir_petugas;
+    var tgl_lahir_petugas;
+    var alamat_petugas;
+    var telp_petugas;
+    var status_petugas;
+    var data_petugas;
+    $(document).ready(function() {
+      $("#ttable").val();
+    });
 
-				//lakukan pengiriman data 
+    $(document).ready(function(){
+      $("#id_petugas").load("ambil_data_petugas.php", "func_petugas=ambil_data_petugas");
+
+	  function getAllData(){
+      $.ajax({
+		      type : "GET",	
+          url : "ambil_data_petugas.php",
+          data : {func_petugas : "ambil_data_petugas"},
+          cache : false,
+          success : function(msg){
+          data = JSON.parse(msg);
+          console.log(data);
+          var content = "";
+            for (let index = 0; index < data.length; index++) {
+              const element = data[index];
+              content+="<tr>";
+              content+= "<td>"+element.id_petugas+"</td>"+
+              "<td>"+element.nama_petugas+"</td>" +
+              "<td>"+element.jabatan_petugas+" </td>"+
+              "<td>"+element.jk_petugas+" </td>" +
+              "<td>"+element.temp_lahir_petugas+" </td>" +
+              "<td>"+element.tgl_lahir_petugas+" </td>" +
+              "<td>"+element.alamat_petugas+" </td>"+
+              "<td>"+element.telp_petugas+" </td>" +
+              "<td>"+element.status_petugas+" </td>"
+                            content+="</tr>";
+            }
+
+            content+="</tr>";
+            $("#content").html(content);
+          }
+        });
+      }
+      getAllData();
+      $("#id_petugas").change(function() {
+        id_petugas = $("#id_petugas").val();
+      });
+
+      $(document).on('click', '.tdelete', function(){
 				$.ajax({
-					url: "prosesCrudPetugas.php",
-					data: "func_petugas=ambil_data_petugas&option_nama_petugas="+option_nama_petugas,
-					cache: false,
-					success: function(msg){
-						//karna di server pembatas setiap data adalah |
-						//maka kita split dan akan membentuk array
-						data = msg.split("|");
-
-						//masukan ke masing - masing textfield
-						$("#jabatan_petugas").val(data[0]);
-						if (data[1] == 'L'){
-							$("#laki").prop("checked", true);
-							$("#perempuan").prop("checked", false);
-						} else {
-							$("#perempuan").prop("checked", true);
-							$("#laki").prop("checked", false);
-						}
-						$("#temp_lahir_petugas").val(data[2]);
-						$("#tgl_lahir_petugas").val(data[3]);
-						$("#alamat_petugas").val(data[4]);
-						$("#telp_petugas").val(data[5]);
-						$("#status_petugas").val(data[6]);
-					}
-				});
-			});
-			//jika tombol update diclick
-			$("#tupdate").click(function(){
-				//ambil nilai-nilai dari masing-masing input
-				option_nama_petugas = $("#option_nama_petugas").val();
-				if (option_nama_petugas=="Pilih Nama Petugas") {
-					alert("Pilih dulu nama_petugas");
-					exit();
-				}
-				
-				jabatan_petugas = $("#jabatan_petugas").val();
-				jk_petugas = $("input[name='jk_petugas']:checked").val(); 
-                temp_lahir_petugas = $("#temp_lahir_petugas").val();
-                tgl_lahir_petugas = $("#tgl_lahir_petugas").val();
-                alamat_petugas = $("#alamat_petugas").val();
-                telp_petugas = $("#no_telp_petugas").val();
-                status_petugas = $("#status_petugas").val();
-
-				data_petugas = "&option_nama_petugas="+option_nama_petugas+"&jabatan_petugas="+jabatan_petugas+"&jk_petugas="+jk_petugas+"&temp_lahir_petugas="+temp_lahir_petugas+"&tgl_lahir_petugas=" + tgl_lahir_petugas+"&alamat_petugas="+alamat_petugas+"&telp_petugas="+telp_petugas+"&status_petugas="+status_petugas;
-				//tampilkan status Updating dan animasinya
-				$("#status").html("Lagi di update. . .");
-				$("#loading").show();
-				$.ajax({
-					url: "prosesCrudPetugas.php",
-					data: "func_petugas=update_data_petugas"+data_petugas,
-					cache: false,
-					success: function(msg){
-						if (msg=="sukses") {
-							$("#status").html("Update Berhasil . . ");
-						}else{
-							$("#status").html("ERROR. . .");
-                            console.log(msg);
-							}
-
-						$("#loading").hide();
-					}
-				});
-			});
-
-			//jika tombol DEL diklik
-			$("#tdelete").click(function(){
-				option_nama_petugas = $("#option_nama_petugas").val();
-				if (option_nama_petugas=="Pilih Nama Petugas") {
-					alert("Pilih dulu nama_petugas");
-					exit();
-					
-				}
-				$.ajax({
-					url: "prosesCrudPetugas.php",
-					data: "func_petugas=del_data_petugas&option_nama_petugas="+option_nama_petugas,
+          type : "POST",
+					url : "prosesCrudPetugas.php",
+					data : {func_petugas : "delete", id_petugas : $(this).val()},
 					cache: false,
 					success: function(msg){
 						if (msg=="sukses") {
 							$("#status").html("Delete Berhasil. . . ");
-						}else{
+              getAllData();
+						} else {
 							$("#status").html("EROR. . .");
 						}
-
-						$("#jabatan_petugas").val("");
-						$("#jk_petugas").val("");
-						$("#temp_lahir_petugas").val("");
-						$("#tgl_lahir_petugas").val("");
-						$("#alamat_petugas").val("");
-						$("#telp_petugas").val("");
-						$("#status_petugas").val("");
 						$("#loading").hide();
-						$("#option_nama_petugas").load ("prosesCrudPetugas.php", "func_petugas=ambil_option_petugas");
 					}
 				});
 			});
+    });
 
-			//Jika link tambah dta diklik
-			$("#formtambah").click(function(){ 
- 				$("#formnik").show(); 
- 				$("#nama_petugas").val(""); 
- 				$("#jabatan_petugas").val(""); 
- 				$("#jk_petugas").val(""); 
- 				$("#temp_lahir_petugas").val("");
- 				$("#tgl_lahir_petugas").val("");
- 				$("#alamat_petugas").val("");
- 				$("#telp_petugas").val("");
- 				$("#status_petugas").val(""); 
- 			});
- 			
-			 //jika link Tambah Data Karyawan diklik 
- 			$("#formtambah").click(function(){ 
- 				$("#formnik").show(); 
- 				$("#nama_petugas").val(""); 
- 				$("#jabatan_petugas").val(""); 
- 				$("jk_petugas").val(""); 
- 				$("#temp_lahir_petugas").val("");
- 				$("#tgl_lahir_petugas").val("");
- 				$("#alamat_petugas").val("");
- 				$("#telp_petugas").val("");
- 				$("#status_petugas").val(""); 
- 			}); 
- 
-			//jika tombol TAMBAH diklik 
-			$("#ttambah").click(function(){ 
-				//ambil nilai-nilai dari masing-masing input 
-				nama_petugas = $("#nama_petugas").val(); 
-				if(!nama_petugas){ 
-					alert("Nama belum diisi\nKlik Tambah Data Petugas"); 
-					exit(); 
-				} 
 
-				jabatan_petugas = $("#jabatan_petugas").val(); 
-				jk_petugas = $("input[name='jk_petugas']:checked").val(); 
-				temp_lahir_petugas = $("#temp_lahir_petugas").val();
-				tgl_lahir_petugas = $("#tgl_lahir_petugas").val();
-				alamat_petugas = $("#alamat_petugas").val();
-				telp_petugas = $("#telp_petugas").val();
-				status_petugas = $("#status_petugas").val(); 
-				data_petugas = "&nama_petugas="+nama_petugas + "&jabatan_petugas="+jabatan_petugas+"&jk_petugas="+jk_petugas+"&temp_lahir_petugas="+temp_lahir_petugas+"&tgl_lahir_petugas="+tgl_lahir_petugas+"&alamat_petugas="+alamat_petugas+"&telp_petugas="+telp_petugas+"&status_petugas="+status_petugas;
-						
-				$("#status").html("Lagi ditambah..."); 
-				$("#loading").show(); 
-				$.ajax({ 
-					url: "prosesCrudPetugas.php", 
-					data: "func_petugas=tambah_data_petugas"+data_petugas, 
-					cache: false, 
-					success: function(msg){ 
-						if(msg=="sukses"){ 
-							$("#status").html("Berhasil ditambah..."); 
-						}else{ 
-							$("#status").html("ERROR.."); 
-						} 
-
-						$("#loading").hide(); 
-						$("#option_nama_petugas").load("prosesCrudPetugas.php","func_petugas=ambil_option_petugas"); 
-						$("#formnik").hide(); 
-						$("#nama_petugas").val(""); 
-					}
-				});
-			});
-		});
- 	</script>
-</head> 
-<body> 
-	Nama Petugas : <select id="option_nama_petugas"></select> <br> 
-	<a id="formtambah" style="cursor:pointer;color:blue;"><u>Tambah Data Petugas</u></a> 
-	<p style="display:none" id="formnik"> 
-		Nama Petugas  :<br> 
-		<input type="text" id="nama_petugas"> 
-	</p> 
-
-	<p> 
-	Jabatan :<br> 
-	<input type="text" id="jabatan_petugas"><p> 
-	Jenis Kelamin :<br> 
-	<input type="radio" value="L" id="laki" name="jk_petugas">Laki - Laki
-	<input type="radio" value="P" id="perempuan" name="jk_petugas">Perempuan <p>
-	Tempat Lahir :<br> 
-	<input type="text" id="temp_lahir_petugas"><p>
-	Tanggal Lahir :<br>
-	<input type="text" id="tgl_lahir_petugas"><p>
-	Alamat :<br>
-	<input type="text" id="alamat_petugas" size="30"><p>
-	No Telepon :<br>
-	<input type="text" id="telp_petugas"><p>
-	Status :<br>
-	<input type="text" id="status_petugas"><p><br>
-	<button id="tupdate">UPDATE</button> 
-	<button id="tdelete">DEL</button> 
-	<button id="ttambah">TAMBAH</button><br><br>
-	<button onclick="window.location.href='home.html'">BACK TO HOME</a></button><br> 
-	<span id="status"></span>	 
+  </script>
 </body> 
 </html>
