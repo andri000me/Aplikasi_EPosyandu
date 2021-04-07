@@ -1,5 +1,5 @@
 <?php
-    include 'connection.php';
+    include '../connection.php';
 
     $func_imun = $_GET['func_imun'];
     

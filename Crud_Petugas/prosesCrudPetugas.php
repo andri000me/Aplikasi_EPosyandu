@@ -1,5 +1,5 @@
 <?php
-    include 'connection.php';
+    include '../connection.php';
 
     $func_petugas = $_GET['func_petugas'];
 

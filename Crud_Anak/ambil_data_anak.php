@@ -1,10 +1,11 @@
 <?php
-    include 'connection.php';
+    include '../connection.php';
 
-    $func_ibu = $_GET['func_ibu'];
+    $func_anak = $_GET['func_anak'];
     
-    if($func_ibu == "ambil_semua_data"){
-        $query = mysqli_query($conn, "SELECT * FROM ref_ibu");
+
+    if($func_anak == "ambil_data_anak"){
+        $query = mysqli_query($conn, "SELECT * FROM ref_anak");
         $data = array();
         while ($d = mysqli_fetch_array($query)){
             //echo $d['id_imunisasi']."|".$d['tgl_imunisasi']."|".$d['usia_saat_vaksin']. "|". $d['tinggi_badan']. "|". $d['berat_badan']. "|". $d['periode'];
@@ -13,8 +14,8 @@
 
         echo json_encode($data);
     } else {
-        $id_ibu = $_GET['id_ibu'];
-        $query = mysqli_query($conn, "SELECT * FROM ref_ibu WHERE id_ibu = '$id_ibu'");
+        $id_anak = $_GET['id_anak'];
+        $query = mysqli_query($conn, "SELECT * FROM ref_anak WHERE id_anak = '$id_anak'");
 
         $d = mysqli_fetch_array($query);
         echo json_encode($d);

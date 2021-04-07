@@ -1,5 +1,5 @@
 <?php
-    include 'connection.php';
+    include '../connection.php';
 
     $func_posyandu = $_GET['func_posyandu'];
 
