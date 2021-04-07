@@ -5,10 +5,11 @@
 
     if($func_ibu == "ambil_option_ibu"){
         $option_ibu = mysqli_query($conn, "SELECT nik_ibu FROM ref_ibu");
-        echo "<option>Pilih Nama Ibu</option>\n";
+        $data = "<option>Pilih Nama Ibu</option>\n";
         while($func_ibu = mysqli_fetch_array($option_ibu)){
-            echo "<option>".$func_ibu['nik_ibu']."</option>\n";
+            $data.= "<option>".$func_ibu['nik_ibu']."</option>\n";
         }
+        echo $data;
     
     } else if($func_ibu == "ambil_data_ibu"){
         $nik_ibu = $_GET['option_nik_ibu'];
