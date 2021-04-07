@@ -13,45 +13,46 @@
 		$(document).ready(function(){
 			$("#ttambah").click(function(){ 
 				//ambil nilai-nilai dari masing-masing input 
-				tgl_imun = $("#tgl_imun").val(); 				
-				usia_saat_vaksin = $("#usia_saat_vaksin").val(); 
-				tinggi_badan = $("#tinggi_badan").val(); 
-				berat_badan = $("#berat_badan").val();
-				periode = $("#periode").val(); 
-				data_imun = "&tgl_imun="+tgl_imun + "&usia_saat_vaksin="+usia_saat_vaksin+"&berat_badan="+berat_badan+"&tinggi_badan="+tinggi_badan+"&periode="+periode;
-				
+				tgl_imun = $("#tgl_imun").val();
 
-				$("#status").html("Lagi ditambah..."); 
-				$("#loading").show(); 
-				$.ajax({ 
-					url: "prosesCrudImunisasi.php", 
-					data: "func_imun=tambah_data_imun"+data_imun, 
-					cache: false, 
-					success: function(msg){ 
-						if(msg=="sukses"){ 
-							$("#status").html("Berhasil ditambah...");
-							location.href="crudImunisasi.html";
-						} else { 
-							$("#status").html("ERROR.."); 
-						} 
-						$("#loading").hide();	
-						$("#formimun").hide(); 
-						$("#tgl_imun").val(""); 
-					}
+    			usia_saat_vaksin = $("#usia_saat_vaksin").val();
+    			tinggi_badan = $("#tinggi_badan").val();
+    			berat_badan = $("#berat_badan").val();
+    			periode = $("#periode").val();
+    			//data = "&tgl_imun="+tgl_imun+"&usia_saat_vaksin="+usia_saat_vaksin+"&tinggi_badan="+tinggi_badan+"&berat_badan="+berat_badan+"&periode="+periode;
+				imunisasi = {
+					"tgl_imun" : tgl_imun,
+					"usia_saat_vaksin" : usia_saat_vaksin,
+					"tinggi_badan" : tinggi_badan,
+					"berat_badan" : berat_badan,
+					"periode" : periode
+				};	
+
+				
+    			$("#status").html("Lagi di update . . . ");
+    			$("#loading").show();
+    			$.ajax({
+    			type : "POST",
+    			url : "prosesCrudImunisasi.php",
+    			data : {imunisasi : imunisasi, func_imun : "tambah_data_imun"},
+    			cache : false,
+    			success : function(msg){
+    				if(msg=="sukses"){
+    					$("#status").html("Tambah Berhasil. . . ");
+    				}else{
+    					$("#status").html("ERROR. . . ");
+    				}
+    				$("#loading").hide();
+       			}
 				});
  			});
-
-			$("#ttambah").click(function(){
-				window.location.href="crudImunisasi.html";
-				return false;
-			});
 		});
 	</script>
 </head>
 <body>
 	<form id="formimun">
 Tanggal Imunisasi : 
-<input type="text" id="tgl_imun"><p>
+<input type="date" id="tgl_imun"><p>
 Usia saat vaksin : 
 <input type="text" id="usia_saat_vaksin"><p>
 Tinggi badan : 
@@ -60,8 +61,9 @@ Berat badan :
 <input type="text" id="berat_badan"> <p>
 Periode :
 <input type="text" id="periode"><p>
-<button id="ttambah" onclick="window.location.href='crudImunisasi.html'"> TAMBAH </button>
-<button id="tupdate"> EDIT </button>
+<button type="button" id="ttambah"> TAMBAH </button>
+<button onclick="window.location.href='crudImunisasi.php'" type="button"> KEMBALI </button>
+<span id="status"></span>
 </form>
 
 </body>

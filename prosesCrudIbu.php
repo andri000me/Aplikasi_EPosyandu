@@ -23,7 +23,6 @@
         $telp_ibu = htmlspecialchars($_GET['telp_ibu']);
         $update = mysqli_query($conn, "UPDATE ref_ibu SET nama_ibu='$nama_ibu', alamat_ibu='$alamat_ibu', 
                                             telp_ibu='$telp_ibu' WHERE nik_ibu='$nik_ibu'");
-        
         if($update){
             echo "sukses";
         } else {
