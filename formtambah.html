@@ -10,16 +10,17 @@
 		var berat_badan;
 		var periode;
 		var data_ibu;
-		$("#ttambah").click(function(){ 
+		$(document).ready(function(){
+			$("#ttambah").click(function(){ 
 				//ambil nilai-nilai dari masing-masing input 
-				tgl_imun = $("#tgl_imun").val(); 
-				
+				tgl_imun = $("#tgl_imun").val(); 				
 				usia_saat_vaksin = $("#usia_saat_vaksin").val(); 
 				tinggi_badan = $("#tinggi_badan").val(); 
 				berat_badan = $("#berat_badan").val();
 				periode = $("#periode").val(); 
 				data_imun = "&tgl_imun="+tgl_imun + "&usia_saat_vaksin="+usia_saat_vaksin+"&berat_badan="+berat_badan+"&tinggi_badan="+tinggi_badan+"&periode="+periode;
 				
+
 				$("#status").html("Lagi ditambah..."); 
 				$("#loading").show(); 
 				$.ajax({ 
@@ -28,16 +29,23 @@
 					cache: false, 
 					success: function(msg){ 
 						if(msg=="sukses"){ 
-							$("#status").html("Berhasil ditambah..."); 
+							$("#status").html("Berhasil ditambah...");
+							location.href="crudImunisasi.html";
 						} else { 
 							$("#status").html("ERROR.."); 
 						} 
-						$("#loading").hide(); 
+						$("#loading").hide();	
 						$("#formimun").hide(); 
 						$("#tgl_imun").val(""); 
 					}
 				});
  			});
+
+			$("#ttambah").click(function(){
+				window.location.href="crudImunisasi.html";
+				return false;
+			});
+		});
 	</script>
 </head>
 <body>
@@ -52,7 +60,7 @@ Berat badan :
 <input type="text" id="berat_badan"> <p>
 Periode :
 <input type="text" id="periode"><p>
-<button id="ttambah"> TAMBAH </button>
+<button id="ttambah" onclick="window.location.href='crudImunisasi.html'"> TAMBAH </button>
 <button id="tupdate"> EDIT </button>
 </form>
 

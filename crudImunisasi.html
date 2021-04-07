@@ -45,7 +45,35 @@
       $("#id_imun").change(function() {
         id_imun = $("#id_imun").val();
       });
+
+      $("#tdelete").click(function(){
+				option_nik_ibu = $("#option_nik_ibu").val();
+				if (option_nik_ibu=="Pilih NIK Ibu") {
+					alert("Pilih dulu nik_ibu");
+					exit();
+				}
+				
+				$.ajax({
+					url: "prosesCrudIbu.php",
+					data: "func_ibu=del_data_ibu&option_nik_ibu="+option_nik_ibu,
+					cache: false,
+					success: function(msg){
+						if (msg=="sukses") {
+							$("#status").html("Delete Berhasil. . . ");
+						} else {
+							$("#status").html("EROR. . .");
+						}
+
+						$("#nama_ibu").val("");
+						$("#alamat_ibu").val("");
+						$("#telp_ibu").val("");
+						$("#loading").hide();
+						$("#option_nik_ibu").load ("prosesCrudIbu.php", "func_ibu=ambi_loption_ibu");
+					}
+				});
+			});
     });
+
 
   </script>
 <html>
@@ -80,5 +108,7 @@
           </td>
         </tr>
     </thead>
+
+	<button onclick="window.location.href='formtambah.html'">Tambah Data</button>
 </body>
 </html>
