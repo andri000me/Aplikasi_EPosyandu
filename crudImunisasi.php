@@ -24,21 +24,27 @@
 	  $.ajax({
 		  type : "GET",	
           url : "prosesCrudImunisasi.php",
-          data : "func_imun=ambil_data_imun",
+          data : { func_imun: "ambil_data_imun"},
           cache : false,
           success : function(msg){
-            data = msg.split("|");
-			console.log(data)
+          data = JSON.parse(msg);
+          console.log(data);
+          var content = "";
+            for (let index = 0; index < data.length; index++) {
+              const element = data[index];
+              content+="<tr>";
+              content+= "<td>"+element.id_imunisasi+"</td>"+
+              "<td>"+element.tgl_imunisasi+"</td>" +
+              "<td>"+element.usia_saat_vaksin+" tahun</td>"+
+              "<td>"+element.tinggi_badan+" cm</td>" +
+              "<td>"+element.berat_badan+" kg</td>" +
+              "<td>"+element.periode+" bulan</td>" +
+              '<td><button onclick="window.location.href=\'formedit.html?id_imunisasi='+ element.id_imunisasi +'\'">EDIT</button></td>'
+              content+="</tr>";
+            }
 
-            $("#id_imun").html(data[0]);
-            // $("#nama_anak").val(data[1]);
-            // $("#id_petugas").val(data[2]);
-            // $("#id_vaksin").val(data[3]);
-            $("#tgl_imun").html(data[1]);
-			$("#usia_saat_vaksin").html(data[2] + " tahun");
-            $("#tinggi_badan").html(data[3] + " cm");
-            $("#berat_badan").html(data[4] + " kg");
-            $("#periode").html(data[5] + " bulan");
+            content+="</tr>";
+            $("#content").html(content);
           }
         });
 
@@ -92,22 +98,10 @@
             <th>Periode</th>
             <th>Aksi</th>
         </tr>
-        <tr>
-          <td id="id_imun"></td>
-          <!-- <td id="nama_anak"></td>
-          <td id="id_petugas"></td>
-          <td id="id_vaksin"></td> -->
-          <td id="tgl_imun"></td>
-		  <td id="usia_saat_vaksin"></td>
-          <td id="tinggi_badan"></td>
-          <td id="berat_badan"></td>
-          <td id="periode"></td>
-          <td id="aksi">
-            <button id="edit">EDIT</button>
-            <button id="del">DELETE</button>
-          </td>
-        </tr>
     </thead>
+    <tbody id="content">
+
+    </tbody>
 
 	<button onclick="window.location.href='formtambah.html'">Tambah Data</button>
 </body>

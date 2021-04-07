@@ -3,11 +3,15 @@
 
     $func_imun = $_GET['func_imun'];
     
+
     if($func_imun == "ambil_data_imun"){
         $query = mysqli_query($conn, "SELECT * FROM ref_imunisasi");
+        $data = array();
         while ($d = mysqli_fetch_array($query)){
-            echo $d['id_imunisasi']."|".$d['tgl_imunisasi']."|".$d['usia_saat_vaksin']. "|". $d['tinggi_badan']. "|". $d['berat_badan']. "|". $d['periode'];
+            //echo $d['id_imunisasi']."|".$d['tgl_imunisasi']."|".$d['usia_saat_vaksin']. "|". $d['tinggi_badan']. "|". $d['berat_badan']. "|". $d['periode'];
+            array_push($data, $d);
         }
+        echo json_encode($data);
     //}
 //      else if($op == "update"){
 //         $tgl_imunisasi = $_GET['tgl_imunisasi'];
@@ -30,15 +34,15 @@
 //             echo "error";
 //         }
    
-    } else if($op == "delete"){
-        $id_imun = $_GET['id_imun'];
-        $del = mysqli_query($conn, "DELETE FROM ref_imunisasi WHERE id_imun='$id_imun'");
+    // } else if($op == "delete"){
+    //     $id_imun = $_GET['id_imun'];
+    //     $del = mysqli_query($conn, "DELETE FROM ref_imunisasi WHERE id_imun='$id_imun'");
         
-        if($del){
-            echo "sukses";
-        } else {
-            echo "error";
-        }
+    //     if($del){
+    //         echo "sukses";
+    //     } else {
+    //         echo "error";
+    //     }
 
    } else if($func_imun == "tambah_data_imun"){   
         $tgl_imunisasi = $_GET['tgl_imun'];
