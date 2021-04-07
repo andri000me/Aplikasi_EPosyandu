@@ -4,11 +4,11 @@
     $func_anak = $_GET['func_anak'];
 
     if($func_anak == "ambil_option_anak"){
-        $option = mysqli_query($conn, "SELECT nik_anak FROM ref_anak");
+        $option = mysqli_query($conn, "SELECT * FROM ref_anak");
         echo "<option>Pilih NIK Anak</option>\n";
         
         while($func_anak = mysqli_fetch_array($option)){
-            echo "<option>".$func_anak['nik_anak']."</option>\n";
+            echo '<option value="'.$func_anak['nik_anak'].'">'.$func_anak['nama_anak'].'</option>\n';
         }
     
     } else if($func_anak == "ambil_data_anak"){

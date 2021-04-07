@@ -20,7 +20,7 @@
 			//jika ada event onchange ambil data dari database
 			$("#option_nama_petugas").change(function(){
 				//ambil nilai nik dari form
-				nama_petugas = $("#nama_petugas").val();
+				option_nama_petugas = $("#option_nama_petugas").val();
 			
 
 				//lakukan pengiriman data 
@@ -94,10 +94,11 @@
 				if (option_nama_petugas=="Pilih Nama Petugas") {
 					alert("Pilih dulu nama_petugas");
 					exit();
+					
 				}
 				$.ajax({
 					url: "prosesCrudPetugas.php",
-					data: "func_petugas=del_data__petugas&nama_petugas="+option_nama_petugas,
+					data: "func_petugas=del_data_petugas&option_nama_petugas="+option_nama_petugas,
 					cache: false,
 					success: function(msg){
 						if (msg=="sukses") {
@@ -114,7 +115,7 @@
 						$("#telp_petugas").val("");
 						$("#status_petugas").val("");
 						$("#loading").hide();
-						$("#option_nama_petugas").load ("prosesCrudPetugas.php", "op=ambiloption");
+						$("#option_nama_petugas").load ("prosesCrudPetugas.php", "func_petugas=ambil_option_petugas");
 					}
 				});
 			});
@@ -122,7 +123,7 @@
 			//Jika link tambah dta diklik
 			$("#formtambah").click(function(){ 
  				$("#formnik").show(); 
- 				$("#nama_petugas2").val(""); 
+ 				$("#nama_petugas").val(""); 
  				$("#jabatan_petugas").val(""); 
  				$("#jk_petugas").val(""); 
  				$("#temp_lahir_petugas").val("");
@@ -149,7 +150,7 @@
 			$("#ttambah").click(function(){ 
 				//ambil nilai-nilai dari masing-masing input 
 				nama_petugas = $("#nama_petugas").val(); 
-				if(nama_petugas==""){ 
+				if(!nama_petugas){ 
 					alert("Nama belum diisi\nKlik Tambah Data Petugas"); 
 					exit(); 
 				} 
@@ -159,9 +160,9 @@
 				temp_lahir_petugas = $("#temp_lahir_petugas").val();
 				tgl_lahir_petugas = $("#tgl_lahir_petugas").val();
 				alamat_petugas = $("#alamat_petugas").val();
-				telp_petugas = $("#no_telp_petugas").val();
+				telp_petugas = $("#telp_petugas").val();
 				status_petugas = $("#status_petugas").val(); 
-				datanya = "&nama_petugas="+nama_petugas + "&jabatan_petugas="+jabatan_petugas+"&jk_petugas="+jk_petugas+"&temp_lahir_petugas="+temp_lahir_petugas+"&tgl_lahir_petugas="+tgl_lahir_petugas+"&alamat_petugas="+alamat_petugas+"&telp_petugas="+telp_petugas+"&status_petugas="+status_petugas;
+				data_petugas = "&nama_petugas="+nama_petugas + "&jabatan_petugas="+jabatan_petugas+"&jk_petugas="+jk_petugas+"&temp_lahir_petugas="+temp_lahir_petugas+"&tgl_lahir_petugas="+tgl_lahir_petugas+"&alamat_petugas="+alamat_petugas+"&telp_petugas="+telp_petugas+"&status_petugas="+status_petugas;
 						
 				$("#status").html("Lagi ditambah..."); 
 				$("#loading").show(); 

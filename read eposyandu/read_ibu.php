@@ -9,7 +9,6 @@
 	<table border="1">
     <thead>
         <tr>
-            <th>#</th>
             <th>ID Ibu</th>
             <th>Nama Ibu</th>
             <th>Nomer Induk Kependudukan (NIK) Ibu</th>
@@ -24,7 +23,6 @@
             while ($ibu = $sql -> fetch_array()){
         ?>
         <tr>
-            <td><?= $i++ ?></td>
             <td><?= $ibu['id_ibu'] ?></td>
             <td><?= $ibu['nama_ibu'] ?></td>
             <td><?= $ibu['nik_ibu'] ?></td>
