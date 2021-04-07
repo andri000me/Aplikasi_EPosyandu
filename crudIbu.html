@@ -52,7 +52,7 @@
 				$("#loading").show();
 				$.ajax({
 					url: "prosesCrudIbu.php",
-					data: "func_ibu=update"+data_ibu,
+					data: "func_ibu=update_data_ibu"+data_ibu,
 					cache: false,
 					success: function(msg){
 						if (msg=="sukses") {
@@ -76,7 +76,7 @@
 				
 				$.ajax({
 					url: "prosesCrudIbu.php",
-					data: "func_ibu=delete&option_nik_ibu="+option_nik_ibu,
+					data: "func_ibu=del_data_ibu&option_nik_ibu="+option_nik_ibu,
 					cache: false,
 					success: function(msg){
 						if (msg=="sukses") {
@@ -124,13 +124,13 @@
 				nama_ibu = $("#nama_ibu").val(); 
 				alamat_ibu = $("#alamat_ibu").val(); 
 				telp_ibu = $("#telp_ibu").val(); 
-				datan_ibu = "&nik_ibu="+nik_ibu + "&nama_ibu="+nama_ibu+"&alamat_ibu="+alamat_ibu+"&telp_ibu="+telp_ibu;
+				data_ibu = "&nik_ibu="+nik_ibu + "&nama_ibu="+nama_ibu+"&alamat_ibu="+alamat_ibu+"&telp_ibu="+telp_ibu;
 				
 				$("#status").html("Lagi ditambah..."); 
 				$("#loading").show(); 
 				$.ajax({ 
 					url: "prosesCrudIbu.php", 
-					data: "func_ibu=tambah"+data_ibu, 
+					data: "func_ibu=tambah_data_ibu"+data_ibu, 
 					cache: false, 
 					success: function(msg){ 
 						if(msg=="sukses"){ 
