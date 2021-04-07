@@ -12,12 +12,12 @@
             <th>#</th>
             <th>ID Anak</th>
             <th>ID Ibu</th>
-            <th>Nama Anak</th>
+            <!--<th>Nama Anak</th>
             <th>Nomer Induk Kependudukan (NIK) Anak</th>
             <th>Tempat Lahir Anak</th>
             <th>Tanggal Lahir Anak</th>
             <th>Usia Anak</th>
-            <th>Jenis Kelamin Anak</th>
+            <th>Jenis Kelamin Anak</th>-->
         </tr>
     </thead>
     <tbody>
