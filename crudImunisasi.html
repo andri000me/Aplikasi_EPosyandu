@@ -1,0 +1,182 @@
+<html>
+<head>
+	<title>CRUD IBU</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script>
+		var tgl_imunisasi;
+		var usia_saat_vaksin;
+		var tinggi_badan;
+		var berat_badan;
+		var periode;
+		var datanya;
+		$(document).ready(function(){
+			//meloading option NIK dari database
+			$("#tgl_imunisasi").load("prosesCrudImunisasi.php", "op=ambiloption");
+
+			//jika ada event onchange ambil data dari database
+			$("#tgl_imunisasi").change(function(){
+				//ambil nilai nik dari form
+				tgl_imunisasi = $("#tgl_imunisasi").val();
+			
+				//lakukan pengiriman data 
+				$.ajax({
+					url: "prosesCrudImunisasi.php",
+					data: "op=ambildata&tgl_imunisasi="+tgl_imunisasi,
+					cache: false,
+					success: function(msg){
+						//karna di server pembatas setiap data adalah |
+						//maka kita split dan akan membentuk array
+						data = msg.split("|");
+
+						//masukan ke masing - masing textfield
+						$("#usia_saat_vaksin").val(data[0]);
+						$("#tinggi_badan").val(data[1]);
+						$("#berat_badan").val(data[2]);
+						$("#periode").val(data[3]);
+					}
+				});
+			});
+			//jika tombol update diclick
+			$("#tupdate").click(function(){
+				//ambil nilai-nilai dari masing-masing input
+				tgl_imunisasi = $("#tgl_imunisasi").val();
+				if (!tgl_imunisasi) {
+					alert("Pilih dulu tgl_imunisasi");
+					exit();
+				}
+
+				tgl_imunisasi = $("#tgl_imunisasi").val();
+				usia_saat_vaksin = $("#usia_saat_vaksin").val();
+                tinggi_badan = $("#tinggi_badan").val();
+                berat_badan = $("#berat_badan").val();
+                periode = $("#periode").val();
+				datanya = "&tgl_imunisasi="+tgl_imunisasi+"&usia_saat_vaksin="+usia_saat_vaksin+"&tinggi_badan="+tinggi_badan+"&berat_badan="+berat_badan+"&periode="+periode;
+				//tampilkan status Updating dan animasinya
+				$("#status").html("Lagi di update. . .");
+				$("#loading").show();
+				$.ajax({
+					url: "prosesCrudImunisasi.php",
+					data: "op=update"+datanya,
+					cache: false,
+					success: function(msg){
+						if (msg=="sukses") {
+							$("#status").html("Update Berhasil . . ");
+						} else {
+							$("#status").html("ERROR. . .");
+                            console.log(msg);
+						}
+						$("#loading").hide();
+					}
+				});
+			});
+
+			//jika tombol DEL diklik
+			$("#tdelete").click(function(){
+				tgl_imunisasi = $("#tgl_imunisasi").val();
+				if (tgl_imunisasi=="Pilih tgl_imunisasi") {
+					alert("Pilih dulu tgl_imunisasi");
+					exit();
+				}
+				
+				$.ajax({
+					url: "prosesCrudImunisasi.php",
+					data: "op=delete&tgl_imunisasi="+tgl_imunisasi,
+					cache: false,
+					success: function(msg){
+						if (msg=="sukses") {
+							$("#status").html("Delete Berhasil. . . ");
+						} else {
+							$("#status").html("EROR. . .");
+						}
+
+						$("#usia_saat_vaksin").val("");
+						$("#tinggi_badan").val("");
+						$("#berat_badan").val("");
+						$("#periode").val("");
+						$("#loading").hide();
+						$("#tgl_imunisasi").load ("prosesCrudImunisasi.php", "op=ambiloption");
+					}
+				});
+			});
+
+			//Jika link tambah dta diklik
+			$("#formtambah").click(function(){ 
+				$("#formnik").show(); 
+				$("#tgl_imunisasi2").val(""); 
+				$("#usia_saat_vaksin").val(""); 
+				$("#tinggi_badan").val(""); 
+				$("#berat_badan").val(""); 
+				$("#periode").val("");
+			});
+			
+			//jika link Tambah Data Karyawan diklik 
+			$("#formtambah").click(function(){ 
+				$("#formnik").show(); 
+				$("#tgl_imunisasi2").val(""); 
+				$("#usia_saat_vaksin").val(""); 
+				$("#tinggi_badan").val(""); 
+				$("#berat_badan").val("");
+				$("#periode").val(""); 
+			});
+ 
+			//jika tombol TAMBAH diklik 
+			$("#ttambah").click(function(){ 
+				//ambil nilai-nilai dari masing-masing input 
+				tgl_imunisasi2 = $("#tgl_imunisasi2").val(); 
+				if(tgl_imunisasi2==""){ 
+					alert("Nama belum diisi\nKlik Tambah Data Imunisasi"); 
+					exit(); 
+				} 
+				
+				usia_saat_vaksin = $("#usia_saat_vaksin").val(); 
+				tinggi_badan = $("#tinggi_badan").val(); 
+				berat_badan = $("#berat_badan").val();
+				periode = $("#periode").val(); 
+				datanya = "&tgl_imunisasi2="+tgl_imunisasi2 + "&usia_saat_vaksin="+usia_saat_vaksin+"&tinggi_badan="+tinggi_badan+"&berat_badan="+berat_badan+"&periode="+periode;
+				
+				$("#status").html("Lagi ditambah..."); 
+				$("#loading").show(); 
+				$.ajax({ 
+					url: "prosesCrudImunisasi.php", 
+					data: "op=tambah"+datanya, 
+					cache: false, 
+					success: function(msg){ 
+						if(msg=="sukses"){ 
+							$("#status").html("Berhasil ditambah..."); 
+						} else { 
+							$("#status").html("ERROR.."); 
+						} 
+						$("#loading").hide(); 
+						$("#tgl_imunisasi").load("prosesCrudImunisasi.php","op=ambiloption"); 
+						$("#formnik").hide(); 
+						$("#tgl_imunisasi2").val(""); 
+					}
+				});
+ 			});
+		});
+ 	</script>
+</head> 
+<body> 
+		Tanggal imunisasi : 
+	<select id="tgl_imunisasi"></select><br> 
+	<a id="formtambah" style="cursor:pointer;color:red;"><u>Tambah Data Ibu</u></a> 
+	<p style="display:none" id="formnik"> 
+		Tanggal Imunisasi  :<br> 
+		<input type="text" id="tgl_imunisasi2"> 
+	</p> 
+	<p> 
+		Usia Saat Vaksin :<br> 
+		<input type="text" id="usia_saat_vaksin"><p> 
+		Tinggi Badan :<br> 
+		<input type="text" id="tinggi_badan"><p> 
+		Berat Badan :<br> 
+		<input type="text" id="berat_badan" ><p>
+		Periode : <br>
+		<input type="text" id="periode"> 
+		<button id="tupdate">UPDATE</button> 
+		<button id="tdelete">DEL</button> 
+		<button id="ttambah">TAMBAH</button><br><br>
+		<button onclick="window.location.href='home.html'">BACK TO HOME</a></button><br> 
+	<span id="status"></span>  
+</body> 
+</html>
