@@ -29,12 +29,13 @@
 
         // var_dump($jk_petugas);
         $update = mysqli_query($conn, "UPDATE ref_petugas SET jabatan_petugas='$jabatan_petugas', 
-                                                            jk_petugas='$jk_petugas', 
-                                                            tempat_lahir_petugas='$tempat_lahir_petugas', 
-                                                            tgl_lahir_petugas='$tgl_lahir_petugas',
-                                                            alamat_petugas='$alamat_petugas',
-                                                            no_telp_petugas='$no_telp_petugas',
-                                                            status_petugas='$status_petugas' WHERE nama_petugas='$nama_petugas'");
+                                        jk_petugas='$jk_petugas', 
+                                        tempat_lahir_petugas='$tempat_lahir_petugas', 
+                                        tgl_lahir_petugas='$tgl_lahir_petugas',
+                                        alamat_petugas='$alamat_petugas',
+                                        no_telp_petugas='$no_telp_petugas',
+                                        status_petugas='$status_petugas' 
+                                        WHERE nama_petugas='$nama_petugas'");
         
         if($update){
             echo "sukses";
@@ -51,8 +52,7 @@
         } else {
             echo "error";
         }
-   } else if($op == "tambah"){
-        $id_petugas=uniqid('petugas');    
+   } else if($op == "tambah"){   
         $nama_petugas2 = $_GET['nama_petugas2'];
         $jabatan_petugas = htmlspecialchars($_GET['jabatan_petugas']);
         $jk_petugas = htmlspecialchars($_GET['jk_petugas']);
@@ -63,7 +63,7 @@
         $status_petugas = htmlspecialchars($_GET['status_petugas']);
 
         $tambah = mysqli_query($conn, "INSERT INTO ref_petugas(id_petugas, nama_petugas, jabatan_petugas, jk_petugas, tempat_lahir_petugas, tgl_lahir_petugas, alamat_petugas, no_telp_petugas, status_petugas) 
-                        VALUES('$id_petugas', '$nama_petugas2','$jabatan_petugas','$jk_petugas','$tempat_lahir_petugas', '$tgl_lahir_petugas', '$alamat_petugas', '$no_telp_petugas', '$status_petugas')");
+                        VALUES('', '$nama_petugas2','$jabatan_petugas','$jk_petugas','$tempat_lahir_petugas', '$tgl_lahir_petugas', '$alamat_petugas', '$no_telp_petugas', '$status_petugas')");
         
         if($tambah){
             echo "sukses";

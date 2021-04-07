@@ -21,7 +21,8 @@
         $nik_ibu = htmlspecialchars($_GET['nik_ibu']);
         $alamat_ibu = htmlspecialchars($_GET['alamat_ibu']);
         $no_telp_ibu = htmlspecialchars($_GET['no_telp_ibu']);
-        $update = mysqli_query($conn, "UPDATE ref_ibu SET nik_ibu='$nik_ibu', alamat_ibu='$alamat_ibu', no_telp_ibu='$no_telp_ibu' WHERE nama_ibu='$nama_ibu'");
+        $update = mysqli_query($conn, "UPDATE ref_ibu SET nik_ibu='$nik_ibu', alamat_ibu='$alamat_ibu', 
+                                            no_telp_ibu='$no_telp_ibu' WHERE nama_ibu='$nama_ibu'");
         
         if($update){
             echo "sukses";
@@ -38,13 +39,13 @@
         } else {
             echo "error";
         }
-   } else if($op == "tambah"){
-        $id_ibu=uniqid('ibu');    
+   } else if($op == "tambah"){   
         $nama_ibu2 = $_GET['nama_ibu2'];
         $nik_ibu = htmlspecialchars($_GET['nik_ibu']);
         $alamat_ibu = htmlspecialchars($_GET['alamat_ibu']);
         $no_telp_ibu = htmlspecialchars($_GET['no_telp_ibu']);
-        $tambah = mysqli_query($conn, "INSERT INTO ref_ibu(id_ibu, nama_ibu, nik_ibu, alamat_ibu, no_telp_ibu) VALUES('$id_ibu', '$nama_ibu2','$nik_ibu','$alamat_ibu','$no_telp_ibu')");
+        $tambah = mysqli_query($conn, "INSERT INTO ref_ibu(id_ibu, nama_ibu, nik_ibu, alamat_ibu, no_telp_ibu) 
+                                        VALUES('', '$nama_ibu2','$nik_ibu','$alamat_ibu','$no_telp_ibu')");
         
         if($tambah){
             echo "sukses";

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>CRUD ANAK</title>
@@ -19,32 +20,33 @@
 				//ambil nilai nik dari form
 				nama_anak = $("#nama_anak").val();
 			
+				//lakukan pengiriman data 
+				$.ajax({
+					url: "prosesCrudAnak.php",
+					data: "op=ambildata&nama_anak="+nama_anak,
+					cache: false,
+					success: function(msg){
+						//karna di server pembatas setiap data adalah |
+						//maka kita split dan akan membentuk array
+						data = msg.split("|");
 
-			//lakukan pengiriman data 
-			$.ajax({
-				url: "prosesCrudAnak.php",
-				data: "op=ambildata&nama_anak="+nama_anak,
-				cache: false,
-				success: function(msg){
-					//karna di server pembatas setiap data adalah |
-					//maka kita split dan akan membentuk array
-					data = msg.split("|");
+						//masukan ke masing - masing textfield
+						$("#nik_anak").val(data[0]);
+						$("#tempat_lahir_anak").val(data[1]);
+						$("#tgl_lahir_anak").val(data[2]);
+						$("#usia_anak").val(data[3]);
 
-					//masukan ke masing - masing textfield
-					$("#nik_anak").val(data[0]);
-					$("#tempat_lahir_anak").val(data[1]);
-					$("#tgl_lahir_anak").val(data[2]);
-					$("#usia_anak").val(data[3]);
-					if (data[4] == 'L'){
-						$("#laki").prop("checked", true);
-						$("#perempuan").prop("checked", false);
-					} else {
-						$("#perempuan").prop("checked", true);
-						$("#laki").prop("checked", false);
+						if (data[4] == 'L'){
+							$("#laki").prop("checked", true);
+							$("#perempuan").prop("checked", false);
+						} else {
+							$("#perempuan").prop("checked", true);
+							$("#laki").prop("checked", false);
+						}
 					}
-				}
 				});
 			});
+		
 			//jika tombol update diclick
 			$("#tupdate").click(function(){
 				//ambil nilai-nilai dari masing-masing input
@@ -55,9 +57,9 @@
 				}
 				nik_anak = $("#nik_anak").val();
 				tempat_lahir_anak = $("#tempat_lahir_anak").val();
-                tgl_lahir_anak = $("#tgl_lahir_anak").val();
-                usia_anak = $("#usia_anak").val();
-                jk_anak = $("input[name='jk_anak']:checked").val();
+				tgl_lahir_anak = $("#tgl_lahir_anak").val();
+				usia_anak = $("#usia_anak").val();
+				jk_anak = $("input[name='jk_anak']:checked").val();
 				datanya = "&nama_anak="+nama_anak+"&nik_anak="+nik_anak+"&tempat_lahir_anak="+tempat_lahir_anak+"&tgl_lahir_anak="+tgl_lahir_anak+"&usia_anak="+usia_anak+"&jk_anak="+jk_anak;
 				//tampilkan status Updating dan animasinya
 				$("#status").html("Lagi di update. . .");
@@ -68,13 +70,13 @@
 					cache: false,
 					success: function(msg){
 						if (msg=="sukses") {
-								$("#status").html("Update Berhasil . . ");
-						}else{
-								$("#status").html("ERROR. . .");
-                                console.log(msg);
-							}
-							$("#loading").hide();
+							$("#status").html("Update Berhasil . . ");
+						} else {
+							$("#status").html("ERROR. . .");
 						}
+						
+						$("#loading").hide();
+					}
 				});
 			});
 
@@ -85,6 +87,7 @@
 					alert("Pilih dulu nama_anak");
 					exit();
 				}
+		
 				$.ajax({
 					url: "prosesCrudAnak.php",
 					data: "op=delete&nama_anak="+nama_anak,
@@ -106,88 +109,91 @@
 				});
 			});
 
-	//Jika link tambah dta diklik
-	$("#formtambah").click(function(){ 
- 		$("#formnik").show(); 
- 		$("#nama_anak2").val(""); 
- 		$("#nik_anak").val(""); 
- 		$("#tempat_lahir_anak").val(""); 
- 		$("#tgl_lahir_anak").val("");
- 		$("#usia_anak").val("");
- 		$("#jk_anak").val(""); 
- 		});
- 	//jika link Tambah Data Karyawan diklik 
- $("#formtambah").click(function(){ 
- $("#formnik").show(); 
- $("#nama_anak2").val(""); 
- $("#nik_anak").val(""); 
- $("#tempat_lahir_anak").val(""); 
- $("#tgl_lahir_anak").val("");
- $("#usia_anak").val("");
- $("#jk_anak").val(""); 
- }); 
+
+			//Jika link tambah dta diklik
+			$("#formtambah").click(function(){ 
+				$("#formnik").show(); 
+				$("#nama_anak2").val(""); 
+				$("#nik_anak").val(""); 
+				$("#tempat_lahir_anak").val(""); 
+				$("#tgl_lahir_anak").val("");
+				$("#usia_anak").val("");
+				$("#jk_anak").val(""); 
+			});
+			
+			//jika link Tambah Data Karyawan diklik 
+			$("#formtambah").click(function(){ 
+				$("#formnik").show(); 
+				$("#nama_anak2").val(""); 
+				$("#nik_anak").val(""); 
+				$("#tempat_lahir_anak").val(""); 
+				$("#tgl_lahir_anak").val("");
+				$("#usia_anak").val("");
+				$("#jk_anak").val(""); 
+			}); 
  
- //jika tombol TAMBAH diklik 
- $("#ttambah").click(function(){ 
- //ambil nilai-nilai dari masing-masing input 
- nama_anak2 = $("#nama_anak2").val(); 
- if(nama_anak2==""){ 
- alert("Nama belum diisi\nKlik Tambah Data Anak"); 
- exit(); 
- } 
- nik_anak = $("#nik_anak").val(); 
- tempat_lahir_anak = $("#tempat_lahir_anak").val(); 
- tgl_lahir_anak = $("#tgl_lahir_anak").val();
- usia_anak = $("#usia_anak").val();
- jk_anak = $("input[name='jk_anak']:checked").val(); 
- datanya = "&nama_anak2="+nama_anak2 + "&nik_anak="+nik_anak+"&tempat_lahir_anak="+tempat_lahir_anak+"&tgl_lahir_anak="+tgl_lahir_anak+"&usia_anak="+usia_anak+"&jk_anak="+jk_anak;
- 			$("#status").html("Lagi ditambah..."); 
- 			$("#loading").show(); 
- 			$.ajax({ 
- 			url: "prosesCrudAnak.php", 
- 			data: "op=tambah"+datanya, 
- 			cache: false, 
- 			success: function(msg){ 
- 			if(msg=="sukses"){ 
- 			$("#status").html("Berhasil ditambah..."); 
- 			}else{ 
-			 $("#status").html("ERROR.."); 
-            } 
- 			$("#loading").hide(); 
- 			$("#nama_anak").load("prosesCrudAnak.php","op=ambiloption"); 
- 			$("#formnik").hide(); 
- 			$("#nama_anak2").val(""); }
- 		});
- 	});
-});
- </script>
+			//jika tombol TAMBAH diklik 
+			$("#ttambah").click(function(){ 
+				//ambil nilai-nilai dari masing-masing input 
+				nama_anak2 = $("#nama_anak2").val(); 
+				if(nama_anak2==""){ 
+					alert("Nama belum diisi\nKlik Tambah Data Anak"); 
+					exit(); 
+				} 
+				nik_anak = $("#nik_anak").val(); 
+				tempat_lahir_anak = $("#tempat_lahir_anak").val(); 
+				tgl_lahir_anak = $("#tgl_lahir_anak").val();
+				usia_anak = $("#usia_anak").val();
+				jk_anak = $("input[name='jk_anak']:checked").val(); 
+				datanya = "&nama_anak2="+nama_anak2 + "&nik_anak="+nik_anak+"&tempat_lahir_anak="+tempat_lahir_anak+"&tgl_lahir_anak="+tgl_lahir_anak+"&usia_anak="+usia_anak+"&jk_anak="+jk_anak;
+				
+				$("#status").html("Lagi ditambah..."); 
+				$("#loading").show(); 
+				$.ajax({ 
+					url: "prosesCrudAnak.php", 
+					data: "op=tambah"+datanya, 
+					cache: false, 
+					success: function(msg){ 
+						if(msg=="sukses"){ 
+							$("#status").html("Berhasil ditambah..."); 
+						}else{ 
+							$("#status").html("ERROR.."); 
+						} 
+						$("#loading").hide(); 
+						$("#nama_anak").load("prosesCrudAnak.php","op=ambiloption"); 
+						$("#formnik").hide(); 
+						$("#nama_anak2").val(""); 
+					}
+				});
+			});
+		});
+ 	</script>
 </head> 
 <body> 
-Nama Anak : 
-<select id="nama_anak"></select> 
-<br> 
-<a id="formtambah" style="cursor:pointer;color:green;"><u>Tambah Data Anak</u></a> 
-<p style="display:none" id="formnik"> 
-Nama Anak  :<br> 
-<input type="text" id="nama_anak2"> 
-</p> 
-<p> 
-Nik Anak :<br> 
-<input type="text" id="nik_anak"><p> 
-Tempat Lahir :<br> 
-<input type="text" id="tempat_lahir_anak"><p> 
-Tanggal Lahir :<br> 
-<input type="text" id="tgl_lahir_anak" size="30"><p>
-Usia :<br>
-<input type="text" id="usia_anak"><p>
-Jenis Kelamin :<br>
-<input type="radio" value="L" id="laki" name="jk_anak">Laki - Laki<p>
-<input type="radio" value="P" id="perempuan" name="jk_anak">Perempuan<p>
-<button id="tupdate">UPDATE</button> 
-<button id="tdelete">DEL</button> 
-<button id="ttambah">TAMBAH</button><br><br>
-<button onclick="window.location.href='home.html'">BACK TO HOME</a></button>
-<br> 
-<span id="status"></span>  
+	Nama Anak : 
+	<select id="nama_anak"></select><br> 
+	<a id="formtambah" style="cursor:pointer;color:green;"><u>Tambah Data Anak</u></a> 
+	<p style="display:none" id="formnik"> 
+		Nama Anak  :<br> 
+		<input type="text" id="nama_anak2"> 
+	</p> 
+	<p> 
+		Nik Anak :<br> 
+		<input type="text" id="nik_anak"><p> 
+		Tempat Lahir :<br> 
+		<input type="text" id="tempat_lahir_anak"><p> 
+		Tanggal Lahir :<br> 
+		<input type="text" id="tgl_lahir_anak" size="30"><p>
+		Usia :<br>
+		<input type="text" id="usia_anak"><p>
+		Jenis Kelamin :<br>
+		<input type="radio" value="L" id="laki" name="jk_anak">Laki - Laki<p>
+		<input type="radio" value="P" id="perempuan" name="jk_anak">Perempuan<p>
+		<button id="tupdate">UPDATE</button> 
+		<button id="tdelete">DEL</button> 
+		<button id="ttambah">TAMBAH</button><br><br>
+		<button onclick="window.location.href='home.html'">BACK TO HOME</a></button><br> 
+		<span id="status"></span>
+	</p>
 </body> 
 </html>
