@@ -105,26 +105,7 @@
 
   </script>
 
-	<p> 
-	Jabatan :<br> 
-	<input type="text" id="jabatan_petugas"><p> 
-	Jenis Kelamin :<br> 
-	<input type="radio" value="L" id="laki" name="jk_petugas">Laki - Laki
-	<input type="radio" value="P" id="perempuan" name="jk_petugas">Perempuan <p>
-	Tempat Lahir :<br> 
-	<input type="text" id="temp_lahir_petugas"><p>
-	Tanggal Lahir :<br>
-	<input type="date" id="tgl_lahir_petugas"><p>
-	Alamat :<br>
-	<input type="text" id="alamat_petugas" size="30"><p>
-	No Telepon :<br>
-	<input type="text" id="telp_petugas"><p>
-	Status :<br>
-	<input type="text" id="status_petugas"><p><br>
-	<button id="tupdate">UPDATE</button> 
-	<button id="tdelete">DEL</button> 
-	<button id="ttambah">TAMBAH</button><br><br>
+
 	<button onclick="window.location.href='../home.html'">BACK TO HOME</a></button><br> 
-	<span id="status"></span>	 
 </body> 
 </html>

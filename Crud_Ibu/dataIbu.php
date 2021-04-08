@@ -23,7 +23,7 @@
 		<input type="text" id="telp_ibu" size="30"><br> 
 		<button id="tupdate">UPDATE</button> 
 		<button id="tdelete">DEL</button> 
-		<button id="ttambah">TAMBAH</button>
+		<button id="ttambah">TAMBAH</button><br>
 		<span id="status"></span><br>
 		<br><br>
 		<button onclick="window.location.href='crudIbu.html'">BACK</a></button>
