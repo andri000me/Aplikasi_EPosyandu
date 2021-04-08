@@ -4,7 +4,7 @@
 
 </head> 
 <body> 
-	<button type="button" onclick="window.location.href='dataIbu.html'">DATA IBU</button>
+	<button type="button" onclick="window.location.href='formTambahIbu.php'">DATA IBU</button>
 	<table id="ttable"border="1">
 		<thead>
 			<tr>
@@ -13,6 +13,7 @@
 				<th>Nik Ibu</th>
 				<th>Alamat Ibu</th>
 				<th>No Telp Ibu</th>
+				<th colspan="2">Aksi</th>
 			</tr>
 		</thead>
 		<tbody id="content">
@@ -52,7 +53,9 @@
 					"<td>"+element.nama_ibu+"</td>" +
 					"<td>"+element.nik_ibu+" </td>"+
 					"<td>"+element.alamat_ibu+" </td>" +
-					"<td>"+element.telp_ibu+"</td>";
+					"<td>"+element.no_telp_ibu+"</td>"+
+				'<td><button onclick="window.location.href=\'formEditIbu.php?id_ibu='+ element.id_ibu +'\'">EDIT</button></td>' +
+              	'<td><button class="tdelete" value="'+element.id_ibu+'">DELETE</button></td>'
 					content+="</tr>";
 					}
 		
@@ -63,6 +66,23 @@
 			}
 
 			getAllData();
+			 $(document).on('click', '.tdelete', function(){
+				$.ajax({
+          type : "POST",
+					url : "prosesCrudIbu.php",
+					data : {func_ibu : "delete", id_ibu : $(this).val()},
+					cache: false,
+					success: function(msg){
+						if (msg=="sukses") {
+							$("#status").html("Delete Berhasil. . . ");
+              getAllData();
+						} else {
+							$("#status").html("EROR. . .");
+						}
+						$("#loading").hide();
+					}
+				});
+			});
 
 		});
 	

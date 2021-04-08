@@ -4,7 +4,7 @@
 	
 </head> 
 <body> 
-	<button type="buton" onclick="window.location.href='data_petugas.html'">Data Petugas</button>
+	<button type="buton" onclick="window.location.href='tambah_petugas.php'">Tambah Data Petugas</button>
 	<table id="ttable"border="1">
     <thead>
         <tr>
@@ -20,6 +20,7 @@
             <th>Alamat</th>
             <th>No Telepon</th>
             <th>Status</th>
+            <th colspan=2>Aksi</th>
         </tr>
     </thead>
     <tbody id="content">
@@ -68,7 +69,9 @@
               "<td>"+element.tgl_lahir_petugas+" </td>" +
               "<td>"+element.alamat_petugas+" </td>"+
               "<td>"+element.telp_petugas+" </td>" +
-              "<td>"+element.status_petugas+" </td>"
+              "<td>"+element.status_petugas+" </td>"+
+              '<td><button onclick="window.location.href=\'formEditPetugas.php?id_petugas='+ element.id_petugas +'\'">EDIT</button></td>' +
+              '<td><button class="tdelete" value="'+element.id_petugas+'">DELETE</button></td>'
                             content+="</tr>";
             }
 

@@ -1,5 +1,5 @@
 <?php
-    $conn = mysqli_connect("localhost", "root", "", "eposyandu");
+    include '../connection.php';
 
     $func_anak = $_POST['func_anak'];
     

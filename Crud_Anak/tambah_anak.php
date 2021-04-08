@@ -31,7 +31,7 @@
 					"usia_anak" : usia_anak,
 					"jk_anak" : document.getElementById('laki').checked ? 'L' : 'P'
 				};	
-
+				
 				
     			$("#status").html("Lagi di update . . . ");
     			$("#loading").show();
