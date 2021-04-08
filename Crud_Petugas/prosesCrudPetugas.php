@@ -19,10 +19,10 @@
         $update = mysqli_query($conn, "UPDATE ref_petugas SET nama_petugas='$nama_petugas', 
                                         jabatan_petugas='$jabatan_petugas', 
                                         jk_petugas='$jk_petugas', 
-                                        temp_lahir_petugas='$temp_lahir_petugas',
+                                        tempat_lahir_petugas='$temp_lahir_petugas',
                                         tgl_lahir_petugas = '$tgl_lahir_petugas',
                                         alamat_petugas = '$alamat_petugas',
-                                        telp_petugas = '$telp_petugas',
+                                        no_telp_petugas = '$telp_petugas',
                                         status_petugas = '$status_petugas'
                                         WHERE id_petugas='$id_petugas'");
         
@@ -55,8 +55,8 @@
         $status_petugas = htmlspecialchars($data['status_petugas']);
 
         $tambah = mysqli_query($conn, "INSERT INTO ref_petugas(id_petugas, nama_petugas, jabatan_petugas, 
-                                                jk_petugas, temp_lahir_petugas, tgl_lahir_petugas, 
-                                                alamat_petugas, telp_petugas, status_petugas) 
+                                                jk_petugas, tempat_lahir_petugas, tgl_lahir_petugas, 
+                                                alamat_petugas, no_telp_petugas, status_petugas) 
                                         VALUES('', '$nama_petugas','$jabatan_petugas','$jk_petugas',
                                                     '$temp_lahir_petugas', '$tgl_lahir_petugas','$alamat_petugas', 
                                                     '$telp_petugas', '$status_petugas')");
@@ -64,7 +64,7 @@
         if($tambah){
             echo "sukses";
         } else {
-            echo "ERROR";
+            echo "error";
         }
    }
 //     }
