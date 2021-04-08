@@ -19,9 +19,6 @@
             <th>Berat Badan</th>
             <th>Periode</th>
             <th colspan="2">Aksi</th>
-        </tr> 
-            
-            <th colspan=2>Aksi</th>
         </tr>
     </thead>
     <tbody id="content">
