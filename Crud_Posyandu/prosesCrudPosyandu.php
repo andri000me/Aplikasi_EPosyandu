@@ -1,43 +1,57 @@
 <?php
-    include '../connection.php';
+    $conn = mysqli_connect("localhost", "root", "", "eposyandu");
 
-    $func_posyandu = $_GET['func_posyandu'];
-
-    if ($func_posyandu == "ambil_option_posyandu"){
-        $option = mysqli_query($conn, "SELECT nama_posyandu FROM ref_posyandu");
-        echo "<option>Pilih Nama Posyandu</option>\n";
-        while($func_posyandu = mysqli_fetch_array($option)){
-            echo "<option>".$func_posyandu['nama_posyandu']."</option>\n";
-        }
+    $func_posyandu = $_POST['func_posyandu'];
     
-    }else if($func_posyandu == "ambil_data_posyandu"){
-        $option_nama_posyandu = $_GET['option_nama_posyandu'];
-        $data = mysqli_query($conn, "SELECT * FROM ref_posyandu WHERE nama_posyandu='$option_nama_posyandu'");
-        $d = mysqli_fetch_array($data);
-        echo $d['alamat_posyandu']."|".$d['kel_posyandu']."|".$d['kec_posyandu']. "|".$d['kota_kab_posyandu'];
-    
-    } else if($func_posyandu == "update_data_posyandu"){
-        $option_nama_posyandu = $_GET['option_nama_posyandu'];
-        $alamat_posyandu = htmlspecialchars($_GET['alamat_posyandu']);
-        $kel_posyandu = htmlspecialchars($_GET['kel_posyandu']);
-        $kec_posyandu = htmlspecialchars($_GET['kec_posyandu']);
-        $kota_kab_posyandu = htmlspecialchars($_GET['kota_kab_posyandu']);
-        $update = mysqli_query($conn, "UPDATE ref_posyandu SET alamat_posyandu='$alamat_posyandu', kel_posyandu='$kel_posyandu', kec_posyandu='$kec_posyandu', kota_kab_posyandu='$kota_kab_posyandu' WHERE nama_posyandu='$option_nama_posyandu'");
+    if($func_posyandu == "update_data_posyandu"){
+        $data = $_POST['posyandu'];
+        $id_posyandu = $_POST['id_posyandu'];
+        
+        $nama_posyandu = $data['nama_posyandu'];
+        $alamat_posyandu = htmlspecialchars($data['alamat_posyandu']);
+        $kel_posyandu = htmlspecialchars($data['kel_posyandu']);
+        $kec_posyandu = htmlspecialchars($data['kec_posyandu']);
+        $kota_kab_posyandu = htmlspecialchars($data['kota_kab_posyandu']);
+        
+        $update = mysqli_query($conn, "UPDATE ref_posyandu SET nama_posyandu='$nama_posyandu', 
+                                        alamat_posyandu='$alamat_posyandu', 
+                                        kel_posyandu='$kel_posyandu', 
+                                        kec_posyandu='$kec_posyandu',
+                                        kota_kab_posyandu='$kota_kab_posyandu'
+                                        WHERE id_posyandu='$id_posyandu'");
         
         if($update){
             echo "sukses";
         } else {
             echo "error";
         }
-    
-    } else if($func_posyandu == "del_data_posyandu"){
-        $option_nama_posyandu = $_GET['option_nama_posyandu'];
-        $del = mysqli_query($conn, "DELETE FROM ref_posyandu WHERE nama_posyandu='$option_nama_posyandu'");
+   
+    } else if($func_posyandu == "delete"){
+        $id_posyandu = $_POST['id_posyandu'];
+        $del = mysqli_query($conn, "DELETE FROM ref_posyandu WHERE id_posyandu='$id_posyandu'");
         
         if($del){
             echo "sukses";
         } else {
             echo "error";
         }
+
+   } else if($func_posyandu == "tambah_data_posyandu"){
+        $data = $_POST['posyandu'];   
+        $nama_posyandu = $data['nama_posyandu'];
+        $alamat_posyandu = htmlspecialchars($data['alamat_posyandu']);
+        $kel_posyandu = htmlspecialchars($data['kel_posyandu']);
+        $kec_posyandu = htmlspecialchars($data['kec_posyandu']);
+        $kota_kab_posyandu = htmlspecialchars($data['kota_kab_posyandu']);
+
+        $tambah = mysqli_query($conn, "INSERT INTO ref_posyandu(id_posyandu, nama_posyandu, alamat_posyandu, kel_posyandu, kec_posyandu, kota_kab_posyandu) 
+                        VALUES('', '$nama_posyandu','$alamat_posyandu','$kel_posyandu','$kec_posyandu', '$kota_kab_posyandu')");
+        
+        if($tambah){
+            echo "sukses";
+        } else {
+            echo "ERROR";
+        }
    }
+//     }
 ?>
