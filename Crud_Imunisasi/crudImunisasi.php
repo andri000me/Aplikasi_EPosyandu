@@ -5,7 +5,7 @@
 
 </head>
 <body>
-<button onclick="window.location.href='formtambah.html'">Tambah Data</button><br><br>
+<button onclick="window.location.href='formtambah.php'">Tambah Data</button><br><br>
   <table id="ttable"border="1">
     <thead>
         <tr>
@@ -18,7 +18,7 @@
             <th>Tinggi Badan</th>
             <th>Berat Badan</th>
             <th>Periode</th>
-            <th>Aksi</th>
+            <th colspan=2>Aksi</th>
         </tr>
     </thead>
     <tbody id="content">
