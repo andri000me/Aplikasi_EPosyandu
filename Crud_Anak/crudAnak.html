@@ -16,6 +16,7 @@
             <th>Tanggal Lahir</th>
             <th>Usia</th>
             <th>Jenis Kelamin</th>
+            <th colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody id="content">
@@ -60,9 +61,9 @@
               "<td>"+element.tempat_lahir_anak+" </td>" +
               "<td>"+element.tanggal_lahir_anak+" </td>" +
               "<td>"+element.usia+" tahun</td>" +
-              "<td>"+element.jk_anak+"</td>"
-              //'<td><button onclick="window.location.href=\'formedit.php?id_anak='+ element.id_anak +'\'">EDIT</button></td>' +
-              //'<td><button class="tdelete" value="'+element.id_anak+'">DELETE</button></td>'
+              "<td>"+element.jk_anak+"</td>"+
+              '<td><button onclick="window.location.href=\'formEditAnak.php?id_anak='+ element.id_anak +'\'">EDIT</button></td>' +
+              '<td><button class="tdelete" value="'+element.id_anak+'">DELETE</button></td>'
               content+="</tr>";
             }
 
