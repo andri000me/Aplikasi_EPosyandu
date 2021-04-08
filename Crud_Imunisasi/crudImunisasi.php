@@ -21,7 +21,6 @@
 
             <th colspan="2">Aksi</th>
             
-            <th colspan=2>Aksi</th>
         </tr>
     </thead>
     <tbody id="content">
