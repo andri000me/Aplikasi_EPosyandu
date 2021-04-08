@@ -4,7 +4,7 @@
 
 </head> 
 <body> 
-	<button type="button" onclick="window.location.href='tambah_anak.html'">DATA ANAK</button><p>
+	<button type="button" onclick="window.location.href='tambah_anak.php'">TAMBAH DATA ANAK</button><p>
 		<table id="ttable"border="1">
 			<p>TABEL ANAK</p>
     <thead>
@@ -34,7 +34,7 @@
     var usia_anak;
     var jk_anak;
     
-    var data;
+    var data_anak;
     $(document).ready(function() {
       $("#ttable").val();
     });
