@@ -90,7 +90,11 @@
 		Kota/Kabupaten Posyandu : 
 		<input type="text" id="kota_kab_posyandu"><p>
 		<button id="tupdate" type="button"> UPDATE </button>
+
 		<button onclick="window.location.href='crudPosyandu.php'" type="button"> KEMBALI </button>
+
+		<button onclick="window.location.href='crud	Posyandu.php'" type="button"> KEMBALI </button>
+
 		<span id="status"></span>
 	</form>
 </body>
