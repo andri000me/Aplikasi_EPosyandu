@@ -18,7 +18,7 @@
             <th>Tinggi Badan</th>
             <th>Berat Badan</th>
             <th>Periode</th>
-            <th>Aksi</th>
+            <th colspan="2">Aksi</th>
         </tr>
     </thead>
     <tbody id="content">
@@ -26,7 +26,7 @@
     </tbody>
   </table>
   <br>
-	<button onclick="window.location.href='../home.html'">BACK TO HOME</button>
+	<button onclick="window.location.href='../home.html'">BACK TO DASHBOARD</button>
 
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <script type="text/javascript">

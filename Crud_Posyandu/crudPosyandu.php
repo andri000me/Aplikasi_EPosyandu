@@ -172,7 +172,7 @@
 		<button id="tupdate">UPDATE</button> 
 		<!-- <button id="tdelete">DEL</button><br><br> -->
 		<!-- <button id="ttambah">TAMBAH</button><br><br> -->
-		<button onclick="window.location.href='../home.html'">BACK TO HOME</a></button><br> 
+		<button onclick="window.location.href='../home.html'">BACK TO DASHBOARD</a></button><br> 
 	<span id="status"></span>  
 </body> 
 </html> 
