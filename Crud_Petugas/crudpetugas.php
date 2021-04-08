@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>CrudPetugas</title>
+	<title>CRUD PETUGASs</title>
 	
 </head> 
 <body> 

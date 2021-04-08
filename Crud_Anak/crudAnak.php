@@ -3,7 +3,12 @@
 	<title>CRUD ANAK</title>
 
 </head> 
-<body> 
+<body>
+  <div id="wrapper">
+    <div id="container">
+      
+    </div>
+  </div>
 	<button type="button" onclick="window.location.href='tambah_anak.php'">TAMBAH DATA ANAK</button><p>
 		<table id="ttable"border="1">
 			<p>TABEL ANAK</p>

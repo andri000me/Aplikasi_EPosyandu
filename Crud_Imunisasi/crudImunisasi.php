@@ -18,12 +18,8 @@
             <th>Tinggi Badan</th>
             <th>Berat Badan</th>
             <th>Periode</th>
-<<<<<<< HEAD
             <th colspan="2">Aksi</th>
-=======
-            <th colspan=2>Aksi</th>
->>>>>>> a9bf6a8625cc1050d95e53c2aab4b6013a1432b2
-        </tr>
+        </tr> 
     </thead>
     <tbody id="content">
 
