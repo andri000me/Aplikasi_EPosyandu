@@ -18,6 +18,8 @@
             <th>Tinggi Badan</th>
             <th>Berat Badan</th>
             <th>Periode</th>
+
+            <th colspan="2">Aksi</th>
             
             <th colspan=2>Aksi</th>
         </tr>
