@@ -51,11 +51,11 @@
 	  function getAllData(){
       $.ajax({
 		      type : "GET",	
-          url : "ambil_data_petugas.php",
+          url : "http://localhost/Aplikasi_EPosyandu/api/Petugas/read.php",
           data : {func_petugas : "ambil_data_petugas"},
           cache : false,
           success : function(msg){
-          data = JSON.parse(msg);
+          data = msg.records;
           console.log(data);
           var content = "";
             for (let index = 0; index < data.length; index++) {

@@ -38,12 +38,12 @@
 	
 		  function getAllData(){
 			$.ajax({
-					type : "GET",	
-				url : "ambil_data_ibu.php",
-				data : {func_ibu : "ambil_semua_data"},
+				type : "GET",	
+				url : "http://localhost/Aplikasi_EPosyandu/api/Ibu/read.php",
+				data : {func_ibu : "ambil_data_ibu"},
 				cache : false,
 				success : function(msg){
-				data = JSON.parse(msg);
+				data = msg.records;
 				console.log(data);
 				var content = "";
 					for (let index = 0; index < data.length; index++) {

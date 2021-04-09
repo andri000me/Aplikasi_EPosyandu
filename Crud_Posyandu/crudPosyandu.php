@@ -48,11 +48,11 @@
 	  function getAllData(){
       $.ajax({
 		  type : "GET",	
-          url : "ambil_data_posyandu.php",
+          url : "http://localhost/Aplikasi_EPosyandu/api/Posyandu/read.php",
           data : {func_posyandu : "ambil_data_posyandu"},
           cache : false,
           success : function(msg){
-          data = JSON.parse(msg);
+          data = msg.records;
           console.log(data);
           var content = "";
             for (let index = 0; index < data.length; index++) {
