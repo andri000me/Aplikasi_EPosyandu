@@ -1,4 +1,4 @@
-OO<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Imunisasi</title>
@@ -18,9 +18,6 @@ OO<!DOCTYPE html>
             <th>Tinggi Badan</th>
             <th>Berat Badan</th>
             <th>Periode</th>
-
-            <th colspan="2">Aksi</th>
-            
             <th colspan=2>Aksi</th>
         </tr>
     </thead>
