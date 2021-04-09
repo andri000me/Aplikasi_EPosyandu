@@ -57,10 +57,10 @@
                         nama_petugas = data['nama_petugas'];
                         jabatan_petugas = data['jabatan_petugas'];
                         jk_petugas = data['jk_petugas'];
-                        temp_lahir_petugas = data['temp_lahir_petugas'];
+                        temp_lahir_petugas = data['tempat_lahir_petugas'];
                         tgl_lahir_petugas = data['tgl_lahir_petugas'];
                         alamat_petugas = data['alamat_petugas'];
-                        telp_petugas = data['telp_petugas'];
+                        telp_petugas = data['no_telp_petugas'];
                         status_petugas = data['status_petugas'];
 
                         //masukan ke masing - masing textfield
